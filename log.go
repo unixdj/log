@@ -46,46 +46,158 @@ func write(priority syslog.Priority, m string) error {
 	return nil
 }
 
+func print(priority syslog.Priority, v ...interface{}) error {
+	return write(priority, fmt.Sprint(v...))
+}
+
 func printf(priority syslog.Priority, format string, v ...interface{}) error {
 	return write(priority, fmt.Sprintf(format, v...))
 }
 
-// Emerg logs a message with severety LOG_EMERG
-func Emerg(format string, v ...interface{}) error {
+func println(priority syslog.Priority, v ...interface{}) error {
+	return write(priority, fmt.Sprintln(v...))
+}
+
+// Emerg logs a message with severety LOG_EMERG.
+// Arguments are handled in the manner of fmt.Print.
+func Emerg(v ...interface{}) error {
+	return print(syslog.LOG_EMERG, v...)
+}
+
+// Alert logs a message with severety LOG_ALERT.
+// Arguments are handled in the manner of fmt.Print.
+func Alert(v ...interface{}) error {
+	return print(syslog.LOG_ALERT, v...)
+}
+
+// Crit logs a message with severety LOG_CRIT.
+// Arguments are handled in the manner of fmt.Print.
+func Crit(v ...interface{}) error {
+	return print(syslog.LOG_CRIT, v...)
+}
+
+// Err logs a message with severety LOG_ERR.
+// Arguments are handled in the manner of fmt.Print.
+func Err(v ...interface{}) error {
+	return print(syslog.LOG_ERR, v...)
+}
+
+// Warning logs a message with severety LOG_WARNING.
+// Arguments are handled in the manner of fmt.Print.
+func Warning(v ...interface{}) error {
+	return print(syslog.LOG_WARNING, v...)
+}
+
+// Notice logs a message with severety LOG_NOTICE.
+// Arguments are handled in the manner of fmt.Print.
+func Notice(v ...interface{}) error {
+	return print(syslog.LOG_NOTICE, v...)
+}
+
+// Info logs a message with severety LOG_INFO.
+// Arguments are handled in the manner of fmt.Print.
+func Info(v ...interface{}) error {
+	return print(syslog.LOG_INFO, v...)
+}
+
+// Debug logs a message with severety LOG_DEBUG.
+// Arguments are handled in the manner of fmt.Print.
+func Debug(v ...interface{}) error {
+	return print(syslog.LOG_DEBUG, v...)
+}
+
+// Emergf logs a message with severety LOG_EMERG.
+// Arguments are handled in the manner of fmt.Printf.
+func Emergf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_EMERG, format, v...)
 }
 
-// Alert logs a message with severety LOG_ALERT
-func Alert(format string, v ...interface{}) error {
+// Alertf logs a message with severety LOG_ALERT.
+// Arguments are handled in the manner of fmt.Printf.
+func Alertf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_ALERT, format, v...)
 }
 
-// Crit logs a message with severety LOG_CRIT
-func Crit(format string, v ...interface{}) error {
+// Critf logs a message with severety LOG_CRIT.
+// Arguments are handled in the manner of fmt.Printf.
+func Critf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_CRIT, format, v...)
 }
 
-// Err logs a message with severety LOG_ERR
-func Err(format string, v ...interface{}) error {
+// Errf logs a message with severety LOG_ERR.
+// Arguments are handled in the manner of fmt.Printf.
+func Errf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_ERR, format, v...)
 }
 
-// Warning logs a message with severety LOG_WARNING
-func Warning(format string, v ...interface{}) error {
+// Warningf logs a message with severety LOG_WARNING.
+// Arguments are handled in the manner of fmt.Printf.
+func Warningf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_WARNING, format, v...)
 }
 
-// Notice logs a message with severety LOG_NOTICE
-func Notice(format string, v ...interface{}) error {
+// Noticef logs a message with severety LOG_NOTICE.
+// Arguments are handled in the manner of fmt.Printf.
+func Noticef(format string, v ...interface{}) error {
 	return printf(syslog.LOG_NOTICE, format, v...)
 }
 
-// Info logs a message with severety LOG_INFO
-func Info(format string, v ...interface{}) error {
+// Infof logs a message with severety LOG_INFO.
+// Arguments are handled in the manner of fmt.Printf.
+func Infof(format string, v ...interface{}) error {
 	return printf(syslog.LOG_INFO, format, v...)
 }
 
-// Debug logs a message with severety LOG_DEBUG
-func Debug(format string, v ...interface{}) error {
+// Debugf logs a message with severety LOG_DEBUG.
+// Arguments are handled in the manner of fmt.Printf.
+func Debugf(format string, v ...interface{}) error {
 	return printf(syslog.LOG_DEBUG, format, v...)
+}
+
+// Emergln logs a message with severety LOG_EMERG.
+// Arguments are handled in the manner of fmt.Println.
+func Emergln(v ...interface{}) error {
+	return println(syslog.LOG_EMERG, v...)
+}
+
+// Alertln logs a message with severety LOG_ALERT.
+// Arguments are handled in the manner of fmt.Println.
+func Alertln(v ...interface{}) error {
+	return println(syslog.LOG_ALERT, v...)
+}
+
+// Critln logs a message with severety LOG_CRIT.
+// Arguments are handled in the manner of fmt.Println.
+func Critln(v ...interface{}) error {
+	return println(syslog.LOG_CRIT, v...)
+}
+
+// Errln logs a message with severety LOG_ERR.
+// Arguments are handled in the manner of fmt.Println.
+func Errln(v ...interface{}) error {
+	return println(syslog.LOG_ERR, v...)
+}
+
+// Warningln logs a message with severety LOG_WARNING.
+// Arguments are handled in the manner of fmt.Println.
+func Warningln(v ...interface{}) error {
+	return println(syslog.LOG_WARNING, v...)
+}
+
+// Noticeln logs a message with severety LOG_NOTICE.
+// Arguments are handled in the manner of fmt.Println.
+func Noticeln(v ...interface{}) error {
+	return println(syslog.LOG_NOTICE, v...)
+}
+
+// Infoln logs a message with severety LOG_INFO.
+// Arguments are handled in the manner of fmt.Println.
+func Infoln(v ...interface{}) error {
+	return println(syslog.LOG_INFO, v...)
+}
+
+// Debugln logs a message with severety LOG_DEBUG.
+// Arguments are handled in the manner of fmt.Println.
+func Debugln(v ...interface{}) error {
+	return println(syslog.LOG_DEBUG, v...)
 }
