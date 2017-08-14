@@ -6,9 +6,10 @@ import (
 	"log/syslog"
 )
 
-const priorityMask = 0x07
+const severityMask = 0x07
 
 var (
+	mask      = syslog.LOG_DEBUG
 	logger    = make([]*log.Logger, 0)
 	syslogger = make([]*syslog.Writer, 0)
 )
@@ -35,11 +36,14 @@ func AddSyslog(l *syslog.Writer) {
 }
 
 func write(priority syslog.Priority, m string) error {
+	if priority > mask {
+		return nil
+	}
 	for _, v := range logger {
 		v.Print(m)
 	}
 	for _, v := range syslogger {
-		if err := syslogFunc[priority&priorityMask](v, m); err != nil {
+		if err := syslogFunc[priority&severityMask](v, m); err != nil {
 			return err
 		}
 	}
@@ -56,6 +60,12 @@ func printf(priority syslog.Priority, format string, v ...interface{}) error {
 
 func println(priority syslog.Priority, v ...interface{}) error {
 	return write(priority, fmt.Sprintln(v...))
+}
+
+// Mask causes future log messages with severety above priority
+// not to be logged.
+func Mask(priority syslog.Priority) {
+	mask = priority
 }
 
 // Emerg logs a message with severety LOG_EMERG.
