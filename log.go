@@ -40,7 +40,7 @@ func write(priority syslog.Priority, m string) error {
 		return nil
 	}
 	for _, v := range logger {
-		v.Print(m)
+		v.Output(4, m)
 	}
 	for _, v := range syslogger {
 		if err := syslogFunc[priority&severityMask](v, m); err != nil {
